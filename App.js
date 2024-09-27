@@ -1,36 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { useState } from 'react';
-import Startscreen from './screens/Startscreen';
+import React, { useState } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import Startscreen from './screens/Startscreen'; 
+import Confirmscreen from './screens/Confirmscreen'; 
 
 export default function App() {
   const [screen, setScreen] = useState('Startscreen');
   const [userData, setUserData] = useState({ name: '', email: '', phone: '' });
 
   const handleRegister = (name, email, phone) => {
-    if (validInputs(name, email, phone)) {
-      setUserData({ name, email, phone });
-      setScreen('ConfirmScreen');
-    } else {
-      alert('Invalid input!');
-    }
+    setUserData({ name, email, phone });
+    setScreen('Confirmscreen');
   };
 
   return (
-    <View style={styles.container}>
-      {screen === 'Startscreen' && <Startscreen onRegister={handleRegister} />}
-      {screen === 'Confirmscreen' && <Confirmscreen userData={userData} onConfirm={() => setScreen('Gamescreen')} />}
-      {screen === 'Gamescreen' && <Gamescreen />}
-    </View>
+    <LinearGradient colors={['#a6ddf5', '#3b5998', '#7d7eb8']} style={styles.gradient}>
+      <View style={styles.container}>
+        {screen === 'Startscreen' && <Startscreen onRegister={handleRegister} />}
+        {screen === 'Confirmscreen' && (
+          <Confirmscreen userData={userData} onConfirm={() => setScreen('GameScreen')} />
+        )}
+        {screen === 'GameScreen' && <GameScreen />}
+      </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: 'aliceblue',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
 });
-
