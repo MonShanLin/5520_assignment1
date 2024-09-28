@@ -94,4 +94,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
   },
-  continueButtonText: 
+  continueButtonText: {
+    color: colors().white,
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+});
+
