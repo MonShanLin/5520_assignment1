@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput, Button, StyleSheet, Alert, Image } from 'react-native';
 import colors from '../helper/colors';
+import Card from '../components/Card';
 
 export default function Gamescreen({ phoneNumber, onRestart }) {
     const [gameStarted, setGameStarted] = useState(false);
@@ -166,10 +167,10 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
             </TouchableOpacity>
 
             {!gameStarted ? (
-                <View style={styles.card}>
+                <Card>
                     <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of {lastDigit}.</Text>
                     <Button title="Start" onPress={handleStartGame} />
-                </View>
+                </Card>
 
             ) : isGameOver ? (
                 // Show this card when the game is over

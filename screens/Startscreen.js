@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import colors from '../helper/colors';
+import Card from '../components/Card';
 
 export default function Startscreen({ onRegister }) { 
   const [name, setName] = useState('');
@@ -44,7 +45,7 @@ export default function Startscreen({ onRegister }) {
         <Text style={styles.title}>Welcome</Text>
       </View>
 
-      <View style={styles.card}>
+      <Card>
         <Text style={styles.label}>Name</Text>
         <TextInput
           value={name}
@@ -113,7 +114,7 @@ export default function Startscreen({ onRegister }) {
             />
           </View>
         </View>
-      </View>
+      </Card>
     </View>
   );
 }
