@@ -185,14 +185,14 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
             
             ) : hasGuessedCorrectly ? (
                 // Show this card when the user guessed correctly
-                <View style={styles.card}>
+                <Card>
                     <Text style={styles.info}>You guessed correct!</Text>
                     <Text style={styles.info}>Attempts used: {attemptsUsed}</Text>
                     <Image source={{ uri: imageUrl }} style={styles.image} />
                     <TouchableOpacity onPress={handleNewGame}>
                         <Text style={styles.newGameButton}>New Game</Text>
                     </TouchableOpacity>
-                </View>
+                </Card>
 
             ) : feedbackVisible ? (
                 // Feedback card when the guess is incorrect
