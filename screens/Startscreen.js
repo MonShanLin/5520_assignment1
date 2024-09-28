@@ -125,17 +125,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  card: {
-    width: '85%',
-    backgroundColor: colors().gray,
-    borderRadius: 10,
-    padding: 20,
-    elevation: 5, // For shadow on Android
-    shadowColor: '#000', // For shadow on iOS
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
+
   titleContainer: {
     position: 'absolute',
     top: 100,
