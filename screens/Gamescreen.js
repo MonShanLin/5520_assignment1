@@ -1,20 +1,46 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, Button, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, TextInput, Button, StyleSheet } from 'react-native';
 
 export default function Gamescreen({ phoneNumber, onRestart }) {
+    const [gameStarted, setGameStarted] = useState(false);
+    const [timeLeft, setTimeLeft] = useState(60);
+    const [attemptsLeft, setAttemptsLeft] = useState(4);
+    const [guess, setGuess] = useState('');
+
+      const handleStartGame = () => {
+        setGameStarted(true);
+      };
+
   return (
     <View style={styles.container}>
-      {/* Use TouchableOpacity for the Restart button */}
       <TouchableOpacity onPress={onRestart} style={styles.restartButton}>
         <Text style={styles.restartButtonText}>Restart</Text>
       </TouchableOpacity>
 
-      <View style={styles.card}>
-        <Text style={styles.info}>
-          Guess a number between 1 & 100 that is a multiple of 9.
-        </Text>
-        <Button title="Start" />
-      </View>
+      {!gameStarted ? (
+        <View style={styles.card}>
+          <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of 9.</Text>
+          <Button title="Start" onPress={handleStartGame} />
+        </View>
+      ) : (
+        <View style={styles.card}>
+          <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of 9.</Text>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            value={guess}
+            onChangeText={setGuess}
+            placeholder="Enter here"
+          />
+          <Text style={styles.hintInfo}>Attempts left: {attemptsLeft}</Text>
+          <Text style={styles.hintInfo}>Timer: {timeLeft}s</Text>
+
+          <View style={styles.buttonContainer}>
+            <Button title="Use a Hint" />
+            <Button title="Submit guess" />
+          </View>
+        </View>
+      )}
     </View>
   );
 }
@@ -36,6 +62,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     width: '80%',
+    alignItems: 'center',
   },
   info: {
     fontSize: 20,
@@ -43,9 +70,25 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#4B0082',
   },
+
+  hintInfo: {
+    fontSize: 18,
+    marginBottom: 10,
+    textAlign: 'center',
+    color: '#333333',
+  },
+  input: {
+    height: 40,
+    borderBottomWidth: 2,
+    borderBottomColor: '#4B0082',
+    marginBottom: 20,
+    width: '100%',
+    textAlign: 'center',
+    fontSize: 20,
+},
   restartButton: {
     position: 'absolute',
-    top: 300,
+    top: 250,
     right: 20,
     padding: 10,
     backgroundColor: '#0074D9',
