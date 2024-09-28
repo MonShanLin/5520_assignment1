@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, Button, StyleSheet, Alert, Image } from 'react-native';
 
 export default function Gamescreen({ phoneNumber, onRestart }) {
     const [gameStarted, setGameStarted] = useState(false);
@@ -14,6 +14,10 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
     // State for storing the hint
     const [hint, setHint] = useState('');
     const [isHintUsed, setIsHintUsed] = useState(false);
+    // Store the number of attempts used
+    const [attemptsUsed, setAttemptsUsed] = useState(0); 
+    // Track if the user guessed correctly
+    const [hasGuessedCorrectly, setHasGuessedCorrectly] = useState(false); 
 
         // Timer logic: decrease the timer by 1 second every interval
     useEffect(() => {
@@ -74,8 +78,10 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
 
         // Compare the guess with the correct number
         if (parsedGuess === correctNumber) {
-            Alert.alert('Congratulations!', 'You guessed corrected!');
-            // Reset the game or trigger any success logic
+            // Set the correct guess state
+            setHasGuessedCorrectly(true); 
+            // Calculate attempts used
+            setAttemptsUsed(4 - attemptsLeft + 1); 
         } else {
             const hint = parsedGuess > correctNumber ? 'lower' : 'higher';
             setFeedbackMessage(`You did not guess correct!\nYou should guess ${hint}.`);
@@ -99,6 +105,9 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
           setIsHintUsed(true);
         };
 
+    // Image URL based on the correct number
+    const imageUrl = `https://picsum.photos/id/${correctNumber}/100/100`;    
+
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={onRestart} style={styles.restartButton}>
@@ -110,6 +119,15 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                     <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of {lastDigit}.</Text>
                     <Button title="Start" onPress={handleStartGame} />
                 </View>
+            
+            ) : hasGuessedCorrectly ? (
+                // Show this card when the user guessed correctly
+                <View style={styles.card}>
+                    <Text style={styles.info}>You guessed correct!</Text>
+                    <Text style={styles.info}>Attempts used: {attemptsUsed}</Text>
+                    <Image source={{ uri: imageUrl }} style={styles.image} />
+                </View>
+
             ) : feedbackVisible ? (
                 // Feedback card when the guess is incorrect
                 <View style={styles.card}>
@@ -225,6 +243,11 @@ const styles = StyleSheet.create({
         color: '#4B0082',
         fontSize: 18,
         marginTop: 10,
+    },
+    image: {
+        width: 100,
+        height: 100,
+        marginBottom: 10,
     },
 });
 
