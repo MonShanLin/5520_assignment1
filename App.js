@@ -5,22 +5,34 @@ import Startscreen from './screens/Startscreen';
 import Confirmscreen from './screens/Confirmscreen'; 
 
 export default function App() {
-  const [screen, setScreen] = useState('Startscreen');
+  const [modalVisible, setModalVisible] = useState(false);
   const [userData, setUserData] = useState({ name: '', email: '', phone: '' });
 
   const handleRegister = (name, email, phone) => {
     setUserData({ name, email, phone });
-    setScreen('Confirmscreen');
+    setModalVisible(true);
+  };
+
+  const handleBackToStart = () => {
+    setModalVisible(false);
+  };
+
+  const handleConfirm = () => {
+    setModalVisible(false);
+
   };
 
   return (
     <LinearGradient colors={['#a6ddf5', '#3b5998', '#7d7eb8']} style={styles.gradient}>
       <View style={styles.container}>
-        {screen === 'Startscreen' && <Startscreen onRegister={handleRegister} />}
-        {screen === 'Confirmscreen' && (
-          <Confirmscreen userData={userData} onConfirm={() => setScreen('GameScreen')} />
-        )}
-        {screen === 'GameScreen' && <GameScreen />}
+        <Startscreen onRegister={handleRegister} />
+
+        <Confirmscreen
+          visible={modalVisible}
+          userData={userData}
+          onConfirm={handleConfirm}
+          onBack={handleBackToStart}
+        />
       </View>
     </LinearGradient>
   );
