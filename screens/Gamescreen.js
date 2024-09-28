@@ -207,7 +207,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
             </Card>
 
             ) : (
-                <View style={styles.card}>
+                <Card>
                     <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of  {lastDigit}.</Text>
                     <TextInput
                         style={[
@@ -232,7 +232,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                         <Button title="Use a Hint" onPress={handleUseHint} disabled={isHintUsed}/>
                         <Button title="Submit guess" onPress={handleSubmitGuess} />
                     </View>
-                </View>
+                </Card>
             )}
         </View>
     );
