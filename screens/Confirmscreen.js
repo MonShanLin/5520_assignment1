@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     marginTop: '30%',
   },
   card: {
-    backgroundColor: '#D3D3D3',
+    backgroundColor: colors().gray,
     padding: 20,
     borderRadius: 10,
     alignItems: 'center',
@@ -58,17 +58,17 @@ const styles = StyleSheet.create({
   greeting: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#4B0082',
+    color: colors().purple,
     marginBottom: 10,
   },
   info: {
     fontSize: 18,
     marginBottom: 10,
-    color: '#4B0082',
+    color: colors().purple,
   },
   data: {
     fontSize: 18,
-    color: '#B22222',
+    color: colors().red,
     marginBottom: 5,
   },
   buttonContainer: {
@@ -84,18 +84,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   backButton: {
-    backgroundColor: '#FF4136',
+    backgroundColor: colors().red,
   },
   continueButton: {
-    backgroundColor: '#0074D9',
+    backgroundColor: colors().blue,
   },
   backButtonText: {
-    color: 'white',
+    color: colors().white,  
     fontWeight: 'bold',
     fontSize: 16,
   },
   continueButtonText: {
-    color: 'white',
+    color: colors().white,
     fontWeight: 'bold',
     fontSize: 16,
   },
