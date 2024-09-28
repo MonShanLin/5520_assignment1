@@ -245,18 +245,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    card: {
-        backgroundColor: colors().gray,
-        padding: 20,
-        borderRadius: 10,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
-        width: '80%',
-        alignItems: 'center',
-    },
+    
     info: {
         fontSize: 20,
         marginBottom: 10,
