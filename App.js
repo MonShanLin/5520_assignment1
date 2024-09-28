@@ -3,10 +3,12 @@ import { View, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Startscreen from './screens/Startscreen'; 
 import Confirmscreen from './screens/Confirmscreen'; 
+import Gamescreen from './screens/Gamescreen';
 
 export default function App() {
   const [modalVisible, setModalVisible] = useState(false);
   const [userData, setUserData] = useState({ name: '', email: '', phone: '' });
+  const [screen, setScreen] = useState('Startscreen');
 
   const handleRegister = (name, email, phone) => {
     setUserData({ name, email, phone });
@@ -19,7 +21,12 @@ export default function App() {
 
   const handleConfirm = () => {
     setModalVisible(false);
+    setScreen('Gamescreen');
+  };
 
+  const handleRestart = () => {
+    setScreen('Startscreen');
+    setUserData({ name: '', email: '', phone: '' });
   };
 
   return (
@@ -33,6 +40,11 @@ export default function App() {
           onConfirm={handleConfirm}
           onBack={handleBackToStart}
         />
+
+        {screen === 'Gamescreen' && (
+          <Gamescreen phoneNumber={userData.phone} onRestart={handleRestart} />
+        )}
+
       </View>
     </LinearGradient>
   );
@@ -48,3 +60,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+

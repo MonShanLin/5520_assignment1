@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 export default function Confirmscreen({ visible, userData, onConfirm, onBack }) {
   return (
     <Modal visible={visible} animationType="slide" transparent={true}>
-      <LinearGradient colors={['rgba(0, 0, 0, 0.3)', 'transparent']} style={styles.gradient}>
+      <LinearGradient colors={['rgba(0, 0, 0, 0.6)', 'transparent']} style={styles.gradient}>
         <View style={styles.modalContainer}>
           <View style={styles.card}>
             <Text style={styles.greeting}>Hello {userData.name}</Text>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     marginTop: '30%',
   },
   card: {
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    backgroundColor: '#D3D3D3',
     padding: 20,
     borderRadius: 10,
     alignItems: 'center',
@@ -99,3 +99,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
