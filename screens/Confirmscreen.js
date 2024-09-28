@@ -2,13 +2,14 @@ import React from 'react';
 import { View, Text, Modal, StyleSheet, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import colors from '../helper/colors';
+import Card from '../components/Card';
 
 export default function Confirmscreen({ visible, userData, onConfirm, onBack }) {
   return (
     <Modal visible={visible} animationType="slide" transparent={true}>
       <LinearGradient colors={['rgba(0, 0, 0, 0.6)', 'transparent']} style={styles.gradient}>
         <View style={styles.modalContainer}>
-          <View style={styles.card}>
+          <Card>
             <Text style={styles.greeting}>Hello {userData.name}</Text>
             <Text style={styles.info}>Here is the information you entered:</Text>
             <Text style={styles.data}>{userData.email}</Text>
@@ -23,7 +24,7 @@ export default function Confirmscreen({ visible, userData, onConfirm, onBack }) 
                 <Text style={styles.continueButtonText}>CONTINUE</Text>
               </TouchableOpacity>
             </View>
-          </View>
+          </Card>
         </View>
       </LinearGradient>
     </Modal>
@@ -43,18 +44,7 @@ const styles = StyleSheet.create({
     height: '60%',
     marginTop: '30%',
   },
-  card: {
-    backgroundColor: colors().gray,
-    padding: 20,
-    borderRadius: 10,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-    width: '100%',
-  },
+
   greeting: {
     fontSize: 24,
     fontWeight: 'bold',
