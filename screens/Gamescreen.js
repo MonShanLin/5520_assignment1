@@ -96,7 +96,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
         const parsedGuess = parseInt(text, 10);
 
         // Check if the input is a valid number between 1 and 100
-        if (isNaN(parsedGuess) || parsedGuess < 1 || parsedGuess > 100) {
+        if (/[^0-9]/.test(text) || text === '' || parseInt(text, 10) < 1 || parseInt(text, 10) > 100) {
             Alert.alert('Invalid Input', 'The number cannot be alphabetical or outside of the range of 1 and 100');
             setGuess('');  // Clear the invalid input
         } else {
