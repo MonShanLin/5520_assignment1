@@ -11,13 +11,11 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [correctNumber, setCorrectNumber] = useState(null); 
     const [lastDigit, setLastDigit] = useState(null);
-    // State for storing the hint
-    const [hint, setHint] = useState('');
+    const [hint, setHint] = useState('');// State for storing the hint
     const [isHintUsed, setIsHintUsed] = useState(false);
-    // Store the number of attempts used
-    const [attemptsUsed, setAttemptsUsed] = useState(0); 
-    // Track if the user guessed correctly
-    const [hasGuessedCorrectly, setHasGuessedCorrectly] = useState(false); 
+    const [attemptsUsed, setAttemptsUsed] = useState(0); // Store the number of attempts used
+    const [hasGuessedCorrectly, setHasGuessedCorrectly] = useState(false); // Track if the user guessed correctly
+    const [isGameOver, setIsGameOver] = useState(false);  // Add game over state
 
         // Timer logic: decrease the timer by 1 second every interval
     useEffect(() => {
@@ -80,10 +78,13 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
         setGameStarted(false); // Restart game
         setIsHintUsed(false); // Reset hint usage
         setHint(''); // Clear hint
+        setIsGameOver(false); // Reset game over state
+        setFeedbackVisible(false); // Hide feedback
     };
 
     const handleStartGame = () => {
         setGameStarted(true);
+        setIsGameOver(false);  // Reset game over state when starting a new game
     };
 
     // Validation logic as the user types
@@ -102,7 +103,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
     const handleSubmitGuess = () => {
         const parsedGuess = parseInt(guess, 10);
 
-        if (attemptsLeft === 0) {
+        if (attemptsLeft === 0 || isGameOver) {
             Alert.alert('The game is over!', 'You are out of attempts');
             
             return;
@@ -137,6 +138,12 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
           setIsHintUsed(true);
         };
 
+    // Function to End the Game
+    const handleEndGame = () => {
+        setIsGameOver(true); // Set the game over state when user clicks "End the Game"
+        
+    };    
+
     // Image URL based on the correct number
     const imageUrl = `https://picsum.photos/id/${correctNumber}/100/100`;    
 
@@ -150,6 +157,16 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                 <View style={styles.card}>
                     <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of {lastDigit}.</Text>
                     <Button title="Start" onPress={handleStartGame} />
+                </View>
+
+            ) : isGameOver ? (
+                // Show this card when the game is over
+                <View style={styles.card}>
+                    <Text style={styles.info}>The game is over</Text>
+                    <Image source={require('../assets/sad_smiley.jpg')} style={styles.image} />
+                    <TouchableOpacity onPress={handleNewGame}>
+                        <Text style={styles.newGameButton}>New Game</Text>
+                    </TouchableOpacity>
                 </View>
             
             ) : hasGuessedCorrectly ? (
@@ -170,10 +187,11 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                 <TouchableOpacity onPress={handleTryAgain}>
                     <Text style={styles.tryAgainButton}>Try Again</Text>
                 </TouchableOpacity>
-                <TouchableOpacity >
+                <TouchableOpacity onPress={handleEndGame}>
                     <Text style={styles.endGameButton}>End the Game</Text>
                 </TouchableOpacity>
             </View>
+
             ) : (
                 <View style={styles.card}>
                     <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of  {lastDigit}.</Text>
