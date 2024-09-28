@@ -32,7 +32,9 @@ export default function App() {
   return (
     <LinearGradient colors={['#a6ddf5', '#3b5998', '#7d7eb8']} style={styles.gradient}>
       <View style={styles.container}>
-        <Startscreen onRegister={handleRegister} />
+          {screen === 'Startscreen' && (
+          <Startscreen onRegister={handleRegister} />
+        )}
 
         <Confirmscreen
           visible={modalVisible}
