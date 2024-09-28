@@ -50,6 +50,38 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
         setCorrectNumber(randomMultiple);
     }, [phoneNumber]);
 
+    // Function to randomly choose a new number based on the phone number's last digit
+    const chooseNewNumber = () => {
+        const lastDigit = parseInt(phoneNumber.slice(-1));
+        setLastDigit(lastDigit);
+        const multiples = [];
+
+        // Generate multiples of the last digit between 1 and 100
+        for (let i = lastDigit; i <= 100; i += lastDigit) {
+            multiples.push(i);
+        }
+
+        // Select a random multiple as the correct number
+        const randomMultiple = multiples[Math.floor(Math.random() * multiples.length)];
+        setCorrectNumber(randomMultiple);
+    };
+
+    useEffect(() => {
+        // Choose a new number when clicking new game
+        chooseNewNumber(); 
+    }, [phoneNumber]);
+
+    const handleNewGame = () => {
+        setHasGuessedCorrectly(false); // Reset correct guess state
+        setAttemptsLeft(4); // Reset attempts left
+        setTimeLeft(60); // Reset timer
+        setGuess(''); // Clear the guess input
+        chooseNewNumber(); // Choose a new correct number
+        setGameStarted(false); // Restart game
+        setIsHintUsed(false); // Reset hint usage
+        setHint(''); // Clear hint
+    };
+
     const handleStartGame = () => {
         setGameStarted(true);
     };
@@ -126,6 +158,9 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                     <Text style={styles.info}>You guessed correct!</Text>
                     <Text style={styles.info}>Attempts used: {attemptsUsed}</Text>
                     <Image source={{ uri: imageUrl }} style={styles.image} />
+                    <TouchableOpacity onPress={handleNewGame}>
+                        <Text style={styles.newGameButton}>New Game</Text>
+                    </TouchableOpacity>
                 </View>
 
             ) : feedbackVisible ? (
@@ -249,6 +284,11 @@ const styles = StyleSheet.create({
         height: 100,
         marginBottom: 10,
     },
+
+    newGameButton: {
+        color: '#0074D9',
+        fontWeight: 'bold',
+        fontSize: 18,
+        marginTop: 10,
+    },
 });
-
-
