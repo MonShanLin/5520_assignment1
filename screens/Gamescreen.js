@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput, Button, StyleSheet, Alert, Image } from 'react-native';
+import colors from '../helper/colors';
 
 export default function Gamescreen({ phoneNumber, onRestart }) {
     const [gameStarted, setGameStarted] = useState(false);
@@ -210,7 +211,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                     <TextInput
                         style={[
                             styles.input,
-                            inputFocused && { borderBottomColor: '#0074D9' },  // Change border color when focused
+                            inputFocused && { borderBottomColor: colors().blue },  // Change border color when focused
                         ]}
                         keyboardType="numeric"
                         value={guess}
@@ -244,7 +245,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     card: {
-        backgroundColor: '#D3D3D3',
+        backgroundColor: colors().gray,
         padding: 20,
         borderRadius: 10,
         shadowColor: '#000',
@@ -259,18 +260,18 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginBottom: 10,
         textAlign: 'center',
-        color: '#4B0082',
+        color: colors().purple,
     },
     hintInfo: {
         fontSize: 18,
         marginBottom: 10,
         textAlign: 'center',
-        color: '#333333',
+        color: colors().black,
     },
 
     hintText: {
         fontSize: 18,
-        color: 'blue',
+        color: colors().blue,
         marginBottom: 10,
         textAlign: 'center',
     },
@@ -278,7 +279,7 @@ const styles = StyleSheet.create({
     input: {
         height: 40,
         borderBottomWidth: 2,
-        borderBottomColor: '#4B0082',
+        borderBottomColor: colors().purple,
         marginBottom: 20,
         width: '100%',
         textAlign: 'center',
@@ -290,22 +291,22 @@ const styles = StyleSheet.create({
         top: 200,
         right: 20,
         padding: 10,
-        backgroundColor: '#0074D9',
+        backgroundColor: colors().blue,
         borderRadius: 5,
     },
     restartButtonText: {
-        color: 'white',
+        color: colors().white,
         fontWeight: 'bold',
         fontSize: 16,
     },
     tryAgainButton: {
-        color: '#4B0082',
+        color: colors().blue,
         fontWeight: 'bold',
         fontSize: 18,
         marginTop: 10,
     },
     endGameButton: {
-        color: '#4B0082',
+        color: colors().blue,
         fontSize: 18,
         marginTop: 10,
     },
@@ -316,7 +317,7 @@ const styles = StyleSheet.create({
     },
 
     newGameButton: {
-        color: '#0074D9',
+        color: colors().blue,
         fontWeight: 'bold',
         fontSize: 18,
         marginTop: 10,
