@@ -146,6 +146,9 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
         
     };    
 
+    // Determine the message to display on the game over card
+    const gameOverMessage = isOutOfTime ? 'You are out of time' : 'You are out of attempts';
+
     // Image URL based on the correct number
     const imageUrl = `https://picsum.photos/id/${correctNumber}/100/100`;    
 
@@ -164,8 +167,9 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
             ) : isGameOver ? (
                 // Show this card when the game is over
                 <View style={styles.card}>
-                    <Text style={styles.info}>The game is over</Text>
+                    <Text style={styles.info}>The game is over!</Text>
                     <Image source={require('../assets/sad_smiley.jpg')} style={styles.image} />
+                    <Text style={styles.info}>{gameOverMessage}</Text>
                     <TouchableOpacity onPress={handleNewGame}>
                         <Text style={styles.newGameButton}>New Game</Text>
                     </TouchableOpacity>
