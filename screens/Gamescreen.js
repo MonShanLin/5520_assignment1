@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput, Button, StyleSheet, Alert } from 'react-native';
 
 export default function Gamescreen({ phoneNumber, onRestart }) {
@@ -7,6 +7,38 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
     const [attemptsLeft, setAttemptsLeft] = useState(4);
     const [guess, setGuess] = useState('');
     const [inputFocused, setInputFocused] = useState(false); 
+    const [feedbackVisible, setFeedbackVisible] = useState(false);
+    const [feedbackMessage, setFeedbackMessage] = useState('');
+    const [correctNumber, setCorrectNumber] = useState(null); 
+
+        // Timer logic: decrease the timer by 1 second every interval
+    useEffect(() => {
+        let timer;
+        if (gameStarted && timeLeft > 0) {
+            timer = setInterval(() => {
+                setTimeLeft((prevTime) => prevTime - 1);
+            }, 1000);
+        } else if (timeLeft === 0) {
+            Alert.alert('The game is over!', 'You are out of time');
+            onRestart();  // Restart the game when the timer hits 0
+        }
+        return () => clearInterval(timer);
+    }, [gameStarted, timeLeft]);
+
+    useEffect(() => {
+        // Get the last digit of the phone number
+        const lastDigit = parseInt(phoneNumber.slice(-1));
+        const multiples = [];
+
+        // Generate multiples of the last digit between 1 and 100
+        for (let i = lastDigit; i <= 100; i += lastDigit) {
+            multiples.push(i);
+        }
+
+        // Select a random multiple as the correct number
+        const randomMultiple = multiples[Math.floor(Math.random() * multiples.length)];
+        setCorrectNumber(randomMultiple);
+    }, [phoneNumber]);
 
     const handleStartGame = () => {
         setGameStarted(true);
@@ -25,6 +57,26 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
         }
     }; 
 
+    const handleSubmitGuess = (text) => {
+        const parsedGuess = parseInt(text, 10);
+
+        // Compare the guess with the correct number
+        if (parsedGuess === correctNumber) {
+            Alert.alert('Congratulations!', 'You guessed corrected!');
+            // Reset the game or trigger any success logic
+        } else {
+            const hint = parsedGuess > correctNumber ? 'lower' : 'higher';
+            setFeedbackMessage(`You did not guess correct!\nYou should guess ${hint}.`);
+            setFeedbackVisible(true);
+        }
+    };
+
+    const handleTryAgain = () => {
+        setFeedbackVisible(false);
+        setGuess('');  // Clear the input
+    };
+
+
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={onRestart} style={styles.restartButton}>
@@ -36,6 +88,17 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                     <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of 9.</Text>
                     <Button title="Start" onPress={handleStartGame} />
                 </View>
+            ) : feedbackVisible ? (
+                // Feedback card when the guess is incorrect
+                <View style={styles.card}>
+                <Text style={styles.info}>{feedbackMessage}</Text>
+                <TouchableOpacity onPress={handleTryAgain}>
+                    <Text style={styles.tryAgainButton}>Try Again</Text>
+                </TouchableOpacity>
+                <TouchableOpacity >
+                    <Text style={styles.endGameButton}>End the Game</Text>
+                </TouchableOpacity>
+            </View>
             ) : (
                 <View style={styles.card}>
                     <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of 9.</Text>
@@ -57,7 +120,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
 
                     <View style={styles.buttonContainer}>
                         <Button title="Use a Hint" />
-                        <Button title="Submit guess" />
+                        <Button title="Submit guess" onPress={handleSubmitGuess} />
                     </View>
                 </View>
             )}
@@ -118,5 +181,16 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
         fontSize: 16,
+    },
+    tryAgainButton: {
+        color: '#4B0082',
+        fontWeight: 'bold',
+        fontSize: 18,
+        marginTop: 10,
+    },
+    endGameButton: {
+        color: '#4B0082',
+        fontSize: 18,
+        marginTop: 10,
     },
 });
