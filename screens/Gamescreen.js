@@ -10,6 +10,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
     const [feedbackVisible, setFeedbackVisible] = useState(false);
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [correctNumber, setCorrectNumber] = useState(null); 
+    const [lastDigit, setLastDigit] = useState(null);
 
         // Timer logic: decrease the timer by 1 second every interval
     useEffect(() => {
@@ -28,6 +29,8 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
     useEffect(() => {
         // Get the last digit of the phone number
         const lastDigit = parseInt(phoneNumber.slice(-1));
+        // Set the last digit in the state
+        setLastDigit(lastDigit);
         const multiples = [];
 
         // Generate multiples of the last digit between 1 and 100
@@ -93,7 +96,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
 
             {!gameStarted ? (
                 <View style={styles.card}>
-                    <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of 9.</Text>
+                    <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of {lastDigit}.</Text>
                     <Button title="Start" onPress={handleStartGame} />
                 </View>
             ) : feedbackVisible ? (
@@ -109,7 +112,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
             </View>
             ) : (
                 <View style={styles.card}>
-                    <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of 9.</Text>
+                    <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of  {lastDigit}.</Text>
                     <TextInput
                         style={[
                             styles.input,
