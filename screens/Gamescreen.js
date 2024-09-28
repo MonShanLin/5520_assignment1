@@ -11,6 +11,9 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [correctNumber, setCorrectNumber] = useState(null); 
     const [lastDigit, setLastDigit] = useState(null);
+    // State for storing the hint
+    const [hint, setHint] = useState('');
+    const [isHintUsed, setIsHintUsed] = useState(false);
 
         // Timer logic: decrease the timer by 1 second every interval
     useEffect(() => {
@@ -87,6 +90,14 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
         setGuess('');  // Clear the input
     };
 
+    const handleUseHint = () => {
+        if (correctNumber < 50) {
+            setHint('The number is less than 50');
+          } else {
+            setHint('The number is greater than 50');
+          }
+          setIsHintUsed(true);
+        };
 
     return (
         <View style={styles.container}>
@@ -126,11 +137,14 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                         onBlur={() => setInputFocused(false)}  // Reset focus state when input loses focus
                     />
 
+                    {/* Display hint */}
+                    {hint ? <Text style={styles.hintText}>{hint}</Text> : null}
+
                     <Text style={styles.hintInfo}>Attempts left: {attemptsLeft}</Text>
                     <Text style={styles.hintInfo}>Timer: {timeLeft}s</Text>
 
                     <View style={styles.buttonContainer}>
-                        <Button title="Use a Hint" />
+                        <Button title="Use a Hint" onPress={handleUseHint} disabled={isHintUsed}/>
                         <Button title="Submit guess" onPress={handleSubmitGuess} />
                     </View>
                 </View>
@@ -170,6 +184,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#333333',
     },
+
+    hintText: {
+        fontSize: 18,
+        color: 'blue',
+        marginBottom: 10,
+        textAlign: 'center',
+    },
+    
     input: {
         height: 40,
         borderBottomWidth: 2,
@@ -205,3 +227,5 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
 });
+
+
