@@ -196,7 +196,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
 
             ) : feedbackVisible ? (
                 // Feedback card when the guess is incorrect
-                <View style={styles.card}>
+                <Card>
                 <Text style={styles.info}>{feedbackMessage}</Text>
                 <TouchableOpacity onPress={handleTryAgain}>
                     <Text style={styles.tryAgainButton}>Try Again</Text>
@@ -204,7 +204,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                 <TouchableOpacity onPress={handleEndGame}>
                     <Text style={styles.endGameButton}>End the Game</Text>
                 </TouchableOpacity>
-            </View>
+            </Card>
 
             ) : (
                 <View style={styles.card}>
