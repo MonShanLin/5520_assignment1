@@ -17,6 +17,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
     const [hasGuessedCorrectly, setHasGuessedCorrectly] = useState(false); // Track if the user guessed correctly
     const [isGameOver, setIsGameOver] = useState(false);  // Add game over state
     const [isOutOfTime, setIsOutOfTime] = useState(false);  // New state to track if the game ended because of time
+    const [isOutOfAttempts, setIsOutOfAttempts] = useState(false); 
 
         // Timer logic: decrease the timer by 1 second every interval
     useEffect(() => {
@@ -82,6 +83,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
         setIsGameOver(false); // Reset game over state
         setFeedbackVisible(false); // Hide feedback
         setIsOutOfTime(false);  // Reset the out-of-time flag
+        setIsOutOfAttempts(false);  // Reset the out-of-attempts flag
     };
 
     const handleStartGame = () => {
@@ -123,6 +125,10 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
             setFeedbackVisible(true);
             // Decrease attempts left by 1
             setAttemptsLeft((prevAttempts) => prevAttempts - 1);  
+            if (attemptsLeft - 1 === 0) {
+                setIsOutOfAttempts(true);  // Mark that the game ended due to attempts
+                handleEndGame();  // End the game when attempts run out
+            }
         }
     };
 
@@ -147,7 +153,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
     };    
 
     // Determine the message to display on the game over card
-    const gameOverMessage = isOutOfTime ? 'You are out of time' : 'You are out of attempts';
+    const gameOverMessage = isOutOfTime ? 'You are out of time' : isOutOfAttempts ? 'You are out of attempts' : '';
 
     // Image URL based on the correct number
     const imageUrl = `https://picsum.photos/id/${correctNumber}/100/100`;    
