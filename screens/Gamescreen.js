@@ -57,8 +57,14 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
         }
     }; 
 
-    const handleSubmitGuess = (text) => {
-        const parsedGuess = parseInt(text, 10);
+    const handleSubmitGuess = () => {
+        const parsedGuess = parseInt(guess, 10);
+
+        if (attemptsLeft === 0) {
+            Alert.alert('The game is over!', 'You are out of attempts');
+            
+            return;
+        }
 
         // Compare the guess with the correct number
         if (parsedGuess === correctNumber) {
@@ -68,6 +74,8 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
             const hint = parsedGuess > correctNumber ? 'lower' : 'higher';
             setFeedbackMessage(`You did not guess correct!\nYou should guess ${hint}.`);
             setFeedbackVisible(true);
+            // Decrease attempts left by 1
+            setAttemptsLeft((prevAttempts) => prevAttempts - 1);  
         }
     };
 
