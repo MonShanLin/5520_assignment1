@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
+import colors from '../helper/colors';
 
 export default function Startscreen({ onRegister }) { 
   const [name, setName] = useState('');
@@ -94,19 +95,19 @@ export default function Startscreen({ onRegister }) {
           <Checkbox
             value={isChecked}
             onValueChange={setIsChecked}
-            tintColors={{ true: 'purple', false: 'gray' }}
+            tintColors={{ true: colors.purple, false: colors.gray }}
           />
           <Text style={styles.checkboxLabel}>I am not a robot</Text>
         </View>
 
         <View style={styles.buttonContainer}>
           <View style={styles.resetButton}>
-            <Button title="Reset" color="red" onPress={handleReset} />
+            <Button title="Reset" color={colors.red} onPress={handleReset} />
           </View>
           <View style={styles.registerButton}>
             <Button
               title="Register"
-              color={isChecked ? 'blue' : 'white'}
+              color={isChecked ? colors.blue : colors.white}
               onPress={handleRegister}
               disabled={!isChecked} 
             />
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: '85%',
-    backgroundColor: 'darkgray',
+    backgroundColor: colors().gray,
     borderRadius: 10,
     padding: 20,
     elevation: 5, // For shadow on Android
@@ -143,17 +144,17 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#4B0082',
+    color: colors().purple,
     textAlign: 'center',
   },
   label: {
     fontSize: 20,
     marginBottom: 30,
-    color: '#4B0082',
+    color: colors().purple,
   },
   input: {
-    borderBottomColor: '#4B0082',
-    color: '#4B0082',
+    borderBottomColor: colors().purple,
+    color: colors().purple,
     fontWeight: 'bold',
     borderBottomWidth: 2,
     marginBottom: 10,
@@ -161,10 +162,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   focusedInput: {
-    borderBottomColor: 'red',
+    borderBottomColor: colors().red,
   },
   errorText: {
-    color: '#ff4d4d',
+    color: colors().red,
     marginBottom: 40,
     fontSize: 20,
   },
@@ -175,7 +176,7 @@ const styles = StyleSheet.create({
   },
   checkboxLabel: {
     marginLeft: 8,
-    color: '#4B0082',
+    color: colors().purple,
     fontSize: 16,
   },
   buttonContainer: {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Modal, StyleSheet, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import colors from '../helper/colors';
 
 export default function Confirmscreen({ visible, userData, onConfirm, onBack }) {
   return (
