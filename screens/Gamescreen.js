@@ -16,6 +16,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
     const [attemptsUsed, setAttemptsUsed] = useState(0); // Store the number of attempts used
     const [hasGuessedCorrectly, setHasGuessedCorrectly] = useState(false); // Track if the user guessed correctly
     const [isGameOver, setIsGameOver] = useState(false);  // Add game over state
+    const [isOutOfTime, setIsOutOfTime] = useState(false);  // New state to track if the game ended because of time
 
         // Timer logic: decrease the timer by 1 second every interval
     useEffect(() => {
@@ -25,8 +26,8 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                 setTimeLeft((prevTime) => prevTime - 1);
             }, 1000);
         } else if (timeLeft === 0) {
-            Alert.alert('The game is over!', 'You are out of time');
-            onRestart();  // Restart the game when the timer hits 0
+            setIsOutOfTime(true);  // Mark that the game ended due to time
+            handleEndGame();  // End the game when the timer hits 0
         }
         return () => clearInterval(timer);
     }, [gameStarted, timeLeft]);
@@ -80,6 +81,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
         setHint(''); // Clear hint
         setIsGameOver(false); // Reset game over state
         setFeedbackVisible(false); // Hide feedback
+        setIsOutOfTime(false);  // Reset the out-of-time flag
     };
 
     const handleStartGame = () => {
