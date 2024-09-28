@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity, Button, StyleSheet } from 'react-native';
 
 export default function Gamescreen({ phoneNumber, onRestart }) {
-
-
   return (
     <View style={styles.container}>
+      {/* Use TouchableOpacity for the Restart button */}
+      <TouchableOpacity onPress={onRestart} style={styles.restartButton}>
+        <Text style={styles.restartButtonText}>Restart</Text>
+      </TouchableOpacity>
 
-        <View style={styles.card}>
-          <Text style={styles.info}>
-          Guess a number between 1 & 100 that is multiply of 9.
-          </Text>
-          <Button title="Start" />
-        </View>
-      
-
-      <Button title="Restart" onPress={onRestart} style={styles.restartButton} />
+      <View style={styles.card}>
+        <Text style={styles.info}>
+          Guess a number between 1 & 100 that is a multiple of 9.
+        </Text>
+        <Button title="Start" />
+      </View>
     </View>
   );
 }
@@ -36,21 +35,25 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    width: '80%',
   },
   info: {
-    fontSize: 18,
+    fontSize: 20,
     marginBottom: 10,
     textAlign: 'center',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '100%',
-    marginBottom: 20,
+    color: '#4B0082',
   },
   restartButton: {
     position: 'absolute',
-    top: 10,
-    right: 10,
+    top: 300,
+    right: 20,
+    padding: 10,
+    backgroundColor: '#0074D9',
+    borderRadius: 5,
+  },
+  restartButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
