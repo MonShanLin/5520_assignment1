@@ -174,14 +174,14 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
 
             ) : isGameOver ? (
                 // Show this card when the game is over
-                <View style={styles.card}>
+                <Card>
                     <Text style={styles.info}>The game is over!</Text>
                     <Image source={require('../assets/sad_smiley.jpg')} style={styles.image} />
                     <Text style={styles.info}>{gameOverMessage}</Text>
                     <TouchableOpacity onPress={handleNewGame}>
                         <Text style={styles.newGameButton}>New Game</Text>
                     </TouchableOpacity>
-                </View>
+                </Card>
             
             ) : hasGuessedCorrectly ? (
                 // Show this card when the user guessed correctly

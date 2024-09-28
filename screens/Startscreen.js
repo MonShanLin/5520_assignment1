@@ -182,13 +182,4 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  resetButton: {
-    width: '45%',
-  },
-  registerButton: {
-    width: '45%',
-  },
-});
-
+  
