@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, Button, StyleSheet, Alert } from 'react-native';
 
 export default function Gamescreen({ phoneNumber, onRestart }) {
     const [gameStarted, setGameStarted] = useState(false);
@@ -11,6 +11,19 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
     const handleStartGame = () => {
         setGameStarted(true);
     };
+
+    // Validation logic as the user types
+    const handleGuessInput = (text) => {
+        const parsedGuess = parseInt(text, 10);
+
+        // Check if the input is a valid number between 1 and 100
+        if (isNaN(parsedGuess) || parsedGuess < 1 || parsedGuess > 100) {
+            Alert.alert('Invalid Input', 'The number cannot be alphabetical or outside of the range of 1 and 100');
+            setGuess('');  // Clear the invalid input
+        } else {
+            setGuess(text);  // Set the valid input
+        }
+    }; 
 
     return (
         <View style={styles.container}>
@@ -33,7 +46,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                         ]}
                         keyboardType="numeric"
                         value={guess}
-                        onChangeText={setGuess}
+                        onChangeText={handleGuessInput}
                         placeholder="Enter here"
                         onFocus={() => setInputFocused(true)}  // Set focus state when input gains focus
                         onBlur={() => setInputFocused(false)}  // Reset focus state when input loses focus
