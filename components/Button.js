@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import colors from '../helper/colors';
 
-export default function Button({ title, onPress, color, disabled }) {
+export default function CustomButton({ title, onPress, color, disabled }) {
   return (
     <TouchableOpacity
       style={[styles.button, { backgroundColor: disabled ? colors().gray : color }]}
@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 10,
+    marginVertical: 20,
+    marginHorizontal: 30,
   },
   buttonText: {
     color: colors().white,

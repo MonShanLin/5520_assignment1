@@ -4,6 +4,7 @@ import Checkbox from 'expo-checkbox';
 import colors from '../helper/colors';
 import Card from '../components/Card';
 import Input from '../components/Input';
+import CustomButton from '../components/Button';
 
 export default function Startscreen({ onRegister }) { 
   // Add a new state to keep track of the name
@@ -109,19 +110,21 @@ export default function Startscreen({ onRegister }) {
           <Text style={styles.checkboxLabel}>I am not a robot</Text>
         </View>
 
+        {/* Buttons */}
         <View style={styles.buttonContainer}>
-          <View style={styles.resetButton}>
-            <Button title="Reset" color={colors.red} onPress={handleReset} />
-          </View>
-          <View style={styles.registerButton}>
-            <Button
-              title="Register"
-              color={isChecked ? colors.blue : colors.white}
-              onPress={handleRegister}
-              disabled={!isChecked}
-            />
-          </View>
+          <CustomButton
+            title="Reset"
+            onPress={handleReset}
+            color={colors().red}
+          />
+          <CustomButton
+            title="Register"
+            onPress={handleRegister}
+            color={isChecked ? colors().blue : colors().gray}
+            disabled={!isChecked}
+          />
         </View>
+        
       </Card>
     </View>
   );
@@ -159,12 +162,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-  resetButton: {
-    width: '45%',
-  },
-  registerButton: {
-    width: '45%',
   },
 });
 
