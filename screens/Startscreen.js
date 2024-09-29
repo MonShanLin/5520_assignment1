@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import colors from '../helper/colors';
 import Card from '../components/Card';
+import Input from '../components/Input';
 
 export default function Startscreen({ onRegister }) { 
   // Add a new state to keep track of the name
@@ -53,51 +54,51 @@ export default function Startscreen({ onRegister }) {
       </View>
 
       <Card>
-        <Text style={styles.label}>Name</Text>
-        <TextInput
+        <Input
+          label="Name"
           value={name}
           onFocus={() => {
-            setIsTouched((prevState) => ({ ...prevState, name: true })); 
+            setIsTouched((prevState) => ({ ...prevState, name: true }));
             setFocusedInput('name');
           }}
           onBlur={() => setFocusedInput(null)}
-          onChangeText={(text) => setName(text)}
-          style={[styles.input, focusedInput === 'name' && styles.focusedInput]}
+          onChangeText={setName}
+          isTouched={isTouched.name}
+          validate={validateName}
+          errorMessage="Please enter a valid name"
+          isFocused={focusedInput === 'name'}
         />
-        {isTouched.name && name.length > 0 && !validateName() && (
-          <Text style={styles.errorText}>Please enter a valid name</Text>
-        )}
 
-        <Text style={styles.label}>Email address</Text>
-        <TextInput
+        <Input
+          label="Email address"
           value={email}
           onFocus={() => {
             setIsTouched((prevState) => ({ ...prevState, email: true }));
             setFocusedInput('email');
           }}
           onBlur={() => setFocusedInput(null)}
-          onChangeText={(text) => setEmail(text)}
-          style={[styles.input, focusedInput === 'email' && styles.focusedInput]}
+          onChangeText={setEmail}
+          isTouched={isTouched.email}
+          validate={validateEmail}
+          errorMessage="Please enter a valid email"
+          isFocused={focusedInput === 'email'}
         />
-        {isTouched.email && email.length > 0 && !validateEmail() && (
-          <Text style={styles.errorText}>Please enter a valid email</Text>
-        )}
 
-        <Text style={styles.label}>Phone Number:</Text>
-        <TextInput
+        <Input
+          label="Phone Number"
           value={phone}
           onFocus={() => {
             setIsTouched((prevState) => ({ ...prevState, phone: true }));
             setFocusedInput('phone');
           }}
           onBlur={() => setFocusedInput(null)}
-          onChangeText={(text) => setPhone(text)}
+          onChangeText={setPhone}
           keyboardType="numeric"
-          style={[styles.input, focusedInput === 'phone' && styles.focusedInput]}
+          isTouched={isTouched.phone}
+          validate={validatePhone}
+          errorMessage="Please enter a valid phone number"
+          isFocused={focusedInput === 'phone'}
         />
-        {isTouched.phone && phone.length > 0 && !validatePhone() && (
-          <Text style={styles.errorText}>Please enter a valid phone number</Text>
-        )}
 
         <View style={styles.checkboxContainer}>
           <Checkbox
@@ -117,7 +118,7 @@ export default function Startscreen({ onRegister }) {
               title="Register"
               color={isChecked ? colors.blue : colors.white}
               onPress={handleRegister}
-              disabled={!isChecked} 
+              disabled={!isChecked}
             />
           </View>
         </View>
@@ -144,29 +145,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: colors().purple,
     textAlign: 'center',
-  },
-  label: {
-    fontSize: 20,
-    marginBottom: 30,
-    color: colors().purple,
-  },
-  input: {
-    height: 40,
-    borderBottomColor: colors().purple,
-    color: colors().purple,
-    fontWeight: 'bold',
-    borderBottomWidth: 2,
-    marginBottom: 20,
-    padding: 5,
-    fontSize: 20,
-  },
-  focusedInput: {
-    borderBottomColor: colors().red,
-  },
-  errorText: {
-    color: colors().red,
-    marginBottom: 40,
-    fontSize: 20,
   },
   checkboxContainer: {
     flexDirection: 'row',
