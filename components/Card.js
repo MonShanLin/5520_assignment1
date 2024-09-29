@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import colors from '../helper/colors';
 
 export default function Card({ children, style }) {
-    return <View style={[styles.card, style]}>{children}</View>;
+    return <View style={[styles.card, style]}>{children}</View>; 
 }
 
 const styles = StyleSheet.create({

@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
     color: colors().purple,
   },
   input: {
+    height: 40,
     borderBottomColor: colors().purple,
     color: colors().purple,
     fontWeight: 'bold',
