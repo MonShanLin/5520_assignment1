@@ -179,7 +179,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                 // This card is shown when the game is over
                 <Card style={{ alignItems: 'center' }}>
                     <Text style={styles.info}>The game is over!</Text>
-                    <Image source={require('../assets/sad_smiley.jpg')} style={styles.image} />
+                    <Image source={require('../assets/sad_smiley.png')} style={styles.image} />
                     <Text style={styles.info}>{gameOverMessage}</Text>
                     <CustomButton title="New Game" onPress={handleNewGame} color={colors().blue}/>
                 </Card>
