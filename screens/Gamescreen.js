@@ -4,17 +4,17 @@ import colors from '../helper/colors';
 import Card from '../components/Card';
 
 export default function Gamescreen({ phoneNumber, onRestart }) {
-    const [gameStarted, setGameStarted] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(60);
-    const [attemptsLeft, setAttemptsLeft] = useState(4);
-    const [guess, setGuess] = useState('');
-    const [inputFocused, setInputFocused] = useState(false); 
-    const [feedbackVisible, setFeedbackVisible] = useState(false);
-    const [feedbackMessage, setFeedbackMessage] = useState('');
-    const [correctNumber, setCorrectNumber] = useState(null); 
-    const [lastDigit, setLastDigit] = useState(null);
+    const [gameStarted, setGameStarted] = useState(false); // State to track if the game has started
+    const [timeLeft, setTimeLeft] = useState(60); // State to store the time left
+    const [attemptsLeft, setAttemptsLeft] = useState(4); // State to store the attempts left
+    const [guess, setGuess] = useState(''); // State to store the user's guess
+    const [inputFocused, setInputFocused] = useState(false);  // State to track if the input is focused
+    const [feedbackVisible, setFeedbackVisible] = useState(false); // State to show the feedback card
+    const [feedbackMessage, setFeedbackMessage] = useState(''); // State to store the feedback message
+    const [correctNumber, setCorrectNumber] = useState(null); // State to store the correct number
+    const [lastDigit, setLastDigit] = useState(null); // State to store the last digit of the phone number
     const [hint, setHint] = useState('');// State for storing the hint
-    const [isHintUsed, setIsHintUsed] = useState(false);
+    const [isHintUsed, setIsHintUsed] = useState(false); // State to track if the hint is used
     const [attemptsUsed, setAttemptsUsed] = useState(0); // Store the number of attempts used
     const [hasGuessedCorrectly, setHasGuessedCorrectly] = useState(false); // Track if the user guessed correctly
     const [isGameOver, setIsGameOver] = useState(false);  // Add game over state
@@ -89,7 +89,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
     };
 
     const handleStartGame = () => {
-        setGameStarted(true);
+        setGameStarted(true); // Start the game when the user clicks "Start"
         setIsGameOver(false);  // Reset game over state when starting a new game
     };
 
@@ -105,10 +105,10 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
             setGuess(text);  // Set the valid input
         }
     }; 
-
+    // Function to handle the user's guess
     const handleSubmitGuess = () => {
         const parsedGuess = parseInt(guess, 10);
-
+        // Check if the user has any attempts left
         if (attemptsLeft === 0 || isGameOver) {
             Alert.alert('The game is over!', 'You are out of attempts');
             
@@ -133,12 +133,14 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
             }
         }
     };
-
+    
+    // Function to handle the "Try Again" button
     const handleTryAgain = () => {
         setFeedbackVisible(false);
         setGuess('');  // Clear the input
     };
 
+    // Function to handle the "Use a Hint" button
     const handleUseHint = () => {
         if (correctNumber < 50) {
             setHint('The number is less than 50');
@@ -167,13 +169,14 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
             </TouchableOpacity>
 
             {!gameStarted ? (
+                // This card is shown when the game has not started
                 <Card style={{ alignItems: 'center' }}>
                     <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of {lastDigit}.</Text>
                     <Button title="Start" onPress={handleStartGame} />
                 </Card>
 
             ) : isGameOver ? (
-                // Show this card when the game is over
+                // This card is shown when the game is over
                 <Card style={{ alignItems: 'center' }}>
                     <Text style={styles.info}>The game is over!</Text>
                     <Image source={require('../assets/sad_smiley.jpg')} style={styles.image} />
@@ -184,7 +187,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                 </Card>
             
             ) : hasGuessedCorrectly ? (
-                // Show this card when the user guessed correctly
+                // This card is shown when the user guessed correctly
                 <Card style={{ alignItems: 'center' }}>
                     <Text style={styles.info}>You guessed correct!</Text>
                     <Text style={styles.info}>Attempts used: {attemptsUsed}</Text>
@@ -216,7 +219,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                         ]}
                         keyboardType="numeric"
                         value={guess}
-                        onChangeText={handleGuessInput}
+                        onChangeText={handleGuessInput} // Handle input changes
                         placeholder="Enter here"
                         onFocus={() => setInputFocused(true)}  // Set focus state when input gains focus
                         onBlur={() => setInputFocused(false)}  // Reset focus state when input loses focus
