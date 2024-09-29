@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput, Button, StyleSheet, Alert, Image } from 'react-native';
 import colors from '../helper/colors';
 import Card from '../components/Card';
+import Input from '../components/Input';
 
 export default function Gamescreen({ phoneNumber, onRestart }) {
     const [gameStarted, setGameStarted] = useState(false); // State to track if the game has started
@@ -212,17 +213,18 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
             ) : (
                 <Card style={{ alignItems: 'center' }}>
                     <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of  {lastDigit}.</Text>
-                    <TextInput
-                        style={[
-                            styles.input,
-                            inputFocused && { borderBottomColor: colors().blue },  // Change border color when focused
-                        ]}
-                        keyboardType="numeric"
+
+                    <Input
+                        label=""
                         value={guess}
-                        onChangeText={handleGuessInput} // Handle input changes
-                        placeholder="Enter here"
-                        onFocus={() => setInputFocused(true)}  // Set focus state when input gains focus
-                        onBlur={() => setInputFocused(false)}  // Reset focus state when input loses focus
+                        onFocus={() => setInputFocused(true)}
+                        onBlur={() => setInputFocused(false)}
+                        onChangeText={handleGuessInput}
+                        isTouched={inputFocused}
+                        validate={() => guess !== ''}
+                        errorMessage="Invalid input"
+                        keyboardType="numeric"
+                        isFocused={inputFocused}
                     />
 
                     {/* Display hint */}
@@ -269,16 +271,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     
-    input: {
-        height: 40,
-        borderBottomWidth: 2,
-        borderBottomColor: colors().purple,
-        marginBottom: 20,
-        width: '100%',
-        textAlign: 'center',
-        fontSize: 20,
-        color: '#000',
-    },
     restartButton: {
         position: 'absolute',
         top: 200,

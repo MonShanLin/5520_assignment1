@@ -2,8 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import colors from '../helper/colors';
 
-export default function Input({   
-    
+export default function Input({
     label,
     value,
     onFocus,
