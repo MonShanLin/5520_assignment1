@@ -9,7 +9,7 @@ export default function Confirmscreen({ visible, userData, onConfirm, onBack }) 
     <Modal visible={visible} animationType="slide" transparent={true}>
       <LinearGradient colors={['rgba(0, 0, 0, 0.6)', 'transparent']} style={styles.gradient}>
         <View style={styles.modalContainer}>
-          <Card>
+        <Card style={{ alignItems: 'center' }}>
             <Text style={styles.greeting}>Hello {userData.name}</Text>
             <Text style={styles.info}>Here is the information you entered:</Text>
             <Text style={styles.data}>{userData.email}</Text>

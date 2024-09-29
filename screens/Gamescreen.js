@@ -167,14 +167,14 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
             </TouchableOpacity>
 
             {!gameStarted ? (
-                <Card>
+                <Card style={{ alignItems: 'center' }}>
                     <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of {lastDigit}.</Text>
                     <Button title="Start" onPress={handleStartGame} />
                 </Card>
 
             ) : isGameOver ? (
                 // Show this card when the game is over
-                <Card>
+                <Card style={{ alignItems: 'center' }}>
                     <Text style={styles.info}>The game is over!</Text>
                     <Image source={require('../assets/sad_smiley.jpg')} style={styles.image} />
                     <Text style={styles.info}>{gameOverMessage}</Text>
@@ -185,7 +185,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
             
             ) : hasGuessedCorrectly ? (
                 // Show this card when the user guessed correctly
-                <Card>
+                <Card style={{ alignItems: 'center' }}>
                     <Text style={styles.info}>You guessed correct!</Text>
                     <Text style={styles.info}>Attempts used: {attemptsUsed}</Text>
                     <Image source={{ uri: imageUrl }} style={styles.image} />
@@ -196,18 +196,18 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
 
             ) : feedbackVisible ? (
                 // Feedback card when the guess is incorrect
-                <Card>
-                <Text style={styles.info}>{feedbackMessage}</Text>
-                <TouchableOpacity onPress={handleTryAgain}>
-                    <Text style={styles.tryAgainButton}>Try Again</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleEndGame}>
-                    <Text style={styles.endGameButton}>End the Game</Text>
-                </TouchableOpacity>
-            </Card>
+                <Card style={{ alignItems: 'center' }}>
+                    <Text style={styles.info}>{feedbackMessage}</Text>
+                    <TouchableOpacity onPress={handleTryAgain}>
+                        <Text style={styles.tryAgainButton}>Try Again</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleEndGame}>
+                        <Text style={styles.endGameButton}>End the Game</Text>
+                    </TouchableOpacity>
+                </Card>
 
             ) : (
-                <Card>
+                <Card style={{ alignItems: 'center' }}>
                     <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of  {lastDigit}.</Text>
                     <TextInput
                         style={[
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    
+
     info: {
         fontSize: 20,
         marginBottom: 10,

@@ -2,8 +2,8 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import colors from '../helper/colors';
 
-export default function Card({ children }) {
-  return <View style={styles.card}>{children}</View>;
+export default function Card({ children, style }) {
+    return <View style={[styles.card, style]}>{children}</View>;
 }
 
 const styles = StyleSheet.create({
@@ -17,6 +17,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    alignItems: 'center',
+    //alignItems: 'center',
   },
 });
