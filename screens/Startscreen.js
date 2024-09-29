@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     color: colors().purple,
     fontWeight: 'bold',
     borderBottomWidth: 2,
-    marginBottom: 10,
+    marginBottom: 20,
     padding: 5,
     fontSize: 20,
   },
