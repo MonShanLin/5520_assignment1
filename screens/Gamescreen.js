@@ -166,15 +166,13 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={onRestart} style={styles.restartButton}>
-                <Text style={styles.restartButtonText}>Restart</Text>
-            </TouchableOpacity>
+            <CustomButton title="Restart" onPress={onRestart} style={styles.restartButton} />
 
             {!gameStarted ? (
                 // This card is shown when the game has not started
                 <Card style={{ alignItems: 'center' }}>
                     <Text style={styles.info}>Guess a number between 1 & 100 that is a multiple of {lastDigit}.</Text>
-                    <Button title="Start" onPress={handleStartGame} />
+                    <CustomButton title="Start" onPress={handleStartGame} color={colors().blue} />
                 </Card>
 
             ) : isGameOver ? (
@@ -183,9 +181,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                     <Text style={styles.info}>The game is over!</Text>
                     <Image source={require('../assets/sad_smiley.jpg')} style={styles.image} />
                     <Text style={styles.info}>{gameOverMessage}</Text>
-                    <TouchableOpacity onPress={handleNewGame}>
-                        <Text style={styles.newGameButton}>New Game</Text>
-                    </TouchableOpacity>
+                    <CustomButton title="New Game" onPress={handleNewGame} color={colors().blue}/>
                 </Card>
             
             ) : hasGuessedCorrectly ? (
@@ -194,21 +190,15 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                     <Text style={styles.info}>You guessed correct!</Text>
                     <Text style={styles.info}>Attempts used: {attemptsUsed}</Text>
                     <Image source={{ uri: imageUrl }} style={styles.image} />
-                    <TouchableOpacity onPress={handleNewGame}>
-                        <Text style={styles.newGameButton}>New Game</Text>
-                    </TouchableOpacity>
+                    <CustomButton title="New Game" onPress={handleNewGame} color={colors().blue} />
                 </Card>
 
             ) : feedbackVisible ? (
                 // Feedback card when the guess is incorrect
                 <Card style={{ alignItems: 'center' }}>
                     <Text style={styles.info}>{feedbackMessage}</Text>
-                    <TouchableOpacity onPress={handleTryAgain}>
-                        <Text style={styles.tryAgainButton}>Try Again</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={handleEndGame}>
-                        <Text style={styles.endGameButton}>End the Game</Text>
-                    </TouchableOpacity>
+                    <CustomButton title="Try Again" onPress={handleTryAgain} color={colors().blue} />
+                    <CustomButton title="End the Game" onPress={handleEndGame} color={colors().blue} />
                 </Card>
 
             ) : (
@@ -235,8 +225,8 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                     <Text style={styles.hintInfo}>Timer: {timeLeft}s</Text>
 
                     <View style={styles.buttonContainer}>
-                        <Button title="Use a Hint" onPress={handleUseHint} disabled={isHintUsed}/>
-                        <Button title="Submit guess" onPress={handleSubmitGuess} />
+                    <CustomButton title="Use a Hint" onPress={handleUseHint} color={colors().blue} disabled={isHintUsed}/>
+                    <CustomButton title="Submit guess" onPress={handleSubmitGuess} color={colors().blue}/>
                     </View>
                 </Card>
             )}
@@ -280,32 +270,11 @@ const styles = StyleSheet.create({
         backgroundColor: colors().blue,
         borderRadius: 5,
     },
-    restartButtonText: {
-        color: colors().white,
-        fontWeight: 'bold',
-        fontSize: 16,
-    },
-    tryAgainButton: {
-        color: colors().blue,
-        fontWeight: 'bold',
-        fontSize: 18,
-        marginTop: 10,
-    },
-    endGameButton: {
-        color: colors().blue,
-        fontSize: 18,
-        marginTop: 10,
-    },
+   
     image: {
         width: 100,
         height: 100,
         marginBottom: 10,
     },
 
-    newGameButton: {
-        color: colors().blue,
-        fontWeight: 'bold',
-        fontSize: 18,
-        marginTop: 10,
-    },
 });
