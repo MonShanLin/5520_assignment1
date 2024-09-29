@@ -5,23 +5,30 @@ import colors from '../helper/colors';
 import Card from '../components/Card';
 
 export default function Startscreen({ onRegister }) { 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  // Add a new state to keep track of the name
+  const [name, setName] = useState(''); 
+  // Add a new state to keep track of the email
+  const [email, setEmail] = useState(''); 
+  // Add a new state to keep track of the phone number
   const [phone, setPhone] = useState('');
-  const [isChecked, setIsChecked] = useState(false);
+  // Add a new state to keep track of the checkbox state
+  const [isChecked, setIsChecked] = useState(false); 
+  // Add a new state to keep track of the touched state of the input fields
   const [isTouched, setIsTouched] = useState({
     name: false,
     email: false,
     phone: false,
   });
-
+  // Add a new state to keep track of the focused input field
   const [focusedInput, setFocusedInput] = useState(null);
 
-
+  // Validate the name of non-numeric and more than 1 character
   const validateName = () => name.length > 1 && isNaN(name);
+  // Validate the email of having '@' and '.'
   const validateEmail = () => email.includes('@') && email.includes('.');
+  // Validate the phone number of having 10 digits and not ending with 0 or 1
   const validatePhone = () => phone.length === 10 && !phone.endsWith('0') && !phone.endsWith('1');
-
+  // Handle the register button press
   const handleRegister = () => {
     if (validateName() && validateEmail() && validatePhone() && isChecked) {
       onRegister(name, email, phone);
@@ -29,7 +36,7 @@ export default function Startscreen({ onRegister }) {
       Alert.alert('Invalid input');
     }
   };
-
+  // Handle the reset button press to clear all the input fields
   const handleReset = () => {
     setName('');
     setEmail('');
@@ -50,7 +57,7 @@ export default function Startscreen({ onRegister }) {
         <TextInput
           value={name}
           onFocus={() => {
-            setIsTouched((prevState) => ({ ...prevState, name: true }));
+            setIsTouched((prevState) => ({ ...prevState, name: true })); 
             setFocusedInput('name');
           }}
           onBlur={() => setFocusedInput(null)}
