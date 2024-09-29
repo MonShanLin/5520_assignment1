@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, TextInput, Button, StyleSheet, Alert, Ima
 import colors from '../helper/colors';
 import Card from '../components/Card';
 import Input from '../components/Input';
+import CustomButton from '../components/Button';
 
 export default function Gamescreen({ phoneNumber, onRestart }) {
     const [gameStarted, setGameStarted] = useState(false); // State to track if the game has started
@@ -188,7 +189,7 @@ export default function Gamescreen({ phoneNumber, onRestart }) {
                 </Card>
             
             ) : hasGuessedCorrectly ? (
-                // This card is shown when the user guessed correctly
+                // This card is shown when the user guessed correctly*/}
                 <Card style={{ alignItems: 'center' }}>
                     <Text style={styles.info}>You guessed correct!</Text>
                     <Text style={styles.info}>Attempts used: {attemptsUsed}</Text>
