@@ -21,39 +21,4 @@ export default function Input({
             value={value}
             onFocus={onFocus}
             onBlur={onBlur}
-            onChangeText={onChangeText}
-            keyboardType={keyboardType}
-            style={[styles.input, isFocused && styles.focusedInput]}
-            />
-            {isTouched && value.length > 0 && !validate() && (
-            <Text style={styles.errorText}>{errorMessage}</Text>
-            )}
-        </View>
-    );
-  };
     
-  const styles = StyleSheet.create({
-    label: {
-      fontSize: 20,
-      marginBottom: 30,
-      color: colors().purple,
-    },
-    input: {
-      height: 40,
-      borderBottomColor: colors().purple,
-      color: colors().purple,
-      fontWeight: 'bold',
-      borderBottomWidth: 2,
-      marginBottom: 20,
-      padding: 5,
-      fontSize: 20,
-    },
-    focusedInput: {
-      borderBottomColor: colors().red,
-    },
-    errorText: {
-      color: colors().red,
-      marginBottom: 40,
-      fontSize: 20,
-    },
-  });

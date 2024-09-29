@@ -290,21 +290,4 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginTop: 10,
     },
-    endGameButton: {
-        color: colors().blue,
-        fontSize: 18,
-        marginTop: 10,
-    },
-    image: {
-        width: 100,
-        height: 100,
-        marginBottom: 10,
-    },
-
-    newGameButton: {
-        color: colors().blue,
-        fontWeight: 'bold',
-        fontSize: 18,
-        marginTop: 10,
-    },
-});
+    endGameButton:

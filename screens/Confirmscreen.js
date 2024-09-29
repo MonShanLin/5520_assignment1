@@ -3,12 +3,14 @@ import { View, Text, Modal, StyleSheet, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import colors from '../helper/colors';
 import Card from '../components/Card';
+import CustomButton from '../components/Button';
 
 export default function Confirmscreen({ visible, userData, onConfirm, onBack }) {
   return (
     <Modal visible={visible} animationType="slide" transparent={true}>
       <LinearGradient colors={['rgba(0, 0, 0, 0.6)', 'transparent']} style={styles.gradient}>
         <View style={styles.modalContainer}>
+        {/* Use Card component for display */}
         <Card style={{ alignItems: 'center' }}>
             <Text style={styles.greeting}>Hello {userData.name}</Text>
             <Text style={styles.info}>Here is the information you entered:</Text>
@@ -17,13 +19,21 @@ export default function Confirmscreen({ visible, userData, onConfirm, onBack }) 
             <Text style={styles.info}>If it is not correct, please go back and edit them.</Text>
 
             <View style={styles.buttonContainer}>
-              <TouchableOpacity style={[styles.button, styles.backButton]} onPress={onBack}>
-                <Text style={styles.backButtonText}>GO BACK</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.button, styles.continueButton]} onPress={onConfirm}>
-                <Text style={styles.continueButtonText}>CONTINUE</Text>
-              </TouchableOpacity>
+              {/* Use CustomButton component for 'GO BACK' */}
+              <CustomButton
+                title="GO BACK"
+                onPress={onBack}
+                color={colors().red}
+              />
+
+              {/* Use CustomButton component for 'CONTINUE' */}
+              <CustomButton
+                title="CONTINUE"
+                onPress={onConfirm}
+                color={colors().blue}
+              />
             </View>
+
           </Card>
         </View>
       </LinearGradient>
@@ -66,28 +76,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 20,
     width: '100%',
-  },
-  button: {
-    padding: 10,
-    borderRadius: 5,
-    width: '45%',
-    alignItems: 'center',
-  },
-  backButton: {
-    backgroundColor: colors().red,
-  },
-  continueButton: {
-    backgroundColor: colors().blue,
-  },
-  backButtonText: {
-    color: colors().white,  
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  continueButtonText: {
-    color: colors().white,
-    fontWeight: 'bold',
-    fontSize: 16,
   },
 });
 

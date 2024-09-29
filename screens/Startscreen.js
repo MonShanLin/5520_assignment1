@@ -54,7 +54,9 @@ export default function Startscreen({ onRegister }) {
         <Text style={styles.title}>Welcome</Text>
       </View>
 
+      {/* Use Card component */}
       <Card>
+        {/* Use Input component for name */}
         <Input
           label="Name"
           value={name}
@@ -70,6 +72,7 @@ export default function Startscreen({ onRegister }) {
           isFocused={focusedInput === 'name'}
         />
 
+        {/* Use Input component for email */}
         <Input
           label="Email address"
           value={email}
@@ -85,6 +88,7 @@ export default function Startscreen({ onRegister }) {
           isFocused={focusedInput === 'email'}
         />
 
+        {/* Use Input component for phone number */}
         <Input
           label="Phone Number"
           value={phone}
@@ -110,7 +114,7 @@ export default function Startscreen({ onRegister }) {
           <Text style={styles.checkboxLabel}>I am not a robot</Text>
         </View>
 
-        {/* Buttons */}
+        {/* Use Button component */}
         <View style={styles.buttonContainer}>
           <CustomButton
             title="Reset"
