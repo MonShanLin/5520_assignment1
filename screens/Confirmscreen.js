@@ -6,7 +6,7 @@ import Card from '../components/Card';
 
 export default function Confirmscreen({ visible, userData, onConfirm, onBack }) {
   return (
-    <Modal visible={visible} animationType="slide" transparent={true}>
+    <Modal visible={visible} animationType="slide" transparent={true}> // Add a modal to show the confirmation screen
       <LinearGradient colors={['rgba(0, 0, 0, 0.6)', 'transparent']} style={styles.gradient}>
         <View style={styles.modalContainer}>
         <Card style={{ alignItems: 'center' }}>
